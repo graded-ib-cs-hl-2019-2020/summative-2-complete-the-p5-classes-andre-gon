@@ -27,38 +27,61 @@ import { Ball } from "./modules/ball.js";
 import { Bubble } from "./modules/bubble.js";
 import { Snowflake } from "./modules/snowflakes.js";
 
+
 let balls: Ball[] = [];
 let snowflakes: Snowflake[] = [];
 let bubbles: Bubble[] = [];
 let clickedIndex = -1;
 
+function randomColor() {
+    return ("rgb(" + Math.floor(random(1, 255)) + "," + Math.floor(random(1, 255)) + "," + Math.floor(random(1, 255)) + ")");
+}
+
 function setup() {
+    createCanvas(500, 500);
     let numBubbles = 10;
     let numBalls = 10;
     let numFlakes = 10;
-    createCanvas(500, 500);
-    for (/* TODO REQUIRED - fill this in*/) {
-        balls[i] = new Ball(random(25, width - 25), random(25, height - 25), random(10, 50));
-        /* TODO OPTIONAL - make the balls a random color */
+    for (let i = 0; i < numBalls; i++) {
+        balls[i] = new Ball(random(25, width - 25), random(25, height - 25), random(10, 50), randomColor(), randomColor());
     }
-    for (/* TODO REQUIRED  - fill this in*/) {
-        /* TODO REQUIRED - add the bubbles */
+    for (let i = 0; i < numBubbles; i++) {
+        bubbles[i] = (new Bubble(random(width), random(height), random(10, 50)));
     }
-    for (/* TODO REQUIRED */) {
-        /* TODO REQUIRED - add the snowflakes */
+    for (let i = 0; i < numFlakes; i++) {
+        snowflakes[i] = (new Snowflake(random(width), random(height), random(5, 20)));
     }
 }
+
+
 
 function draw() {
-    background("skyblue");
-    for (/* TODO REQUIRED*/) {
+    background("grey");
+    for (let i = 0; i < balls.length; i++) {
         balls[i].draw();
-        balls[i].move();
+        if (!balls[i].touchingMouse()) {
+            balls[i].move();
+        }
+
+        for (let i = 0; i < bubbles.length; i++) {
+            bubbles[i].draw();
+            if (!bubbles[i].touchingMouse()) {
+                bubbles[i].move();
+            }
+
+        }
+
+        for (let i = 0; i < snowflakes.length; i++) {
+            snowflakes[i].draw();
+            snowflakes[i].move();
+            /*  if (!snowflakes[i].touchingMouse()) {
+                  snowflakes[i].move();*/
+        }
+
     }
-    /* TODO REQUIRED - Draw and move the bubbles and flakes */
 }
 
-/* TODO OPTIONAL - add a function mousePressed() that either stops or starts objects from moving
+/* TODO OPTIONAL - add a function  mousePressed() that either stops or starts objects from moving
    if the mouse is pressed while it is touching them. So you could use this (if careful!) to stop all of the
    objects from moving then start them back up again. The Ball class has some helper functions that will
    help you with this, but you'll need to add them to the other classes.
@@ -68,4 +91,5 @@ function draw() {
 window.draw = draw;
 window.setup = setup;
 window.mousePressed = mousePressed;
-window.mouseReleased = mouseReleased;
+window.mouseReleased = mouseReleased
+

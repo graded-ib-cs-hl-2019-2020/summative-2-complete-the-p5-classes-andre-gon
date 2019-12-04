@@ -9,7 +9,21 @@ export class Bubble {
     private color: string;
     private borderColor: string;
 
-    /* TODO REQUIRED - What's missing here? Add it! */
+    constructor(x: number, y: number, size: number, color: string = "#FFFFFF80", borderColor: string = "#FFFFFF80") {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.xSpeed = random(-0.50, -0.50);
+        this.ySpeed = random(-0.50, -0.50);
+        this.color = color;
+        this.borderColor = borderColor;
+    }
+
+
+    public touchingMouse(): boolean {
+        return this.distFromMouse() < this.size / 2;
+    }
+
 
     public stop() {
         this.stopped = true;
@@ -20,13 +34,28 @@ export class Bubble {
     }
 
     public draw(): void {
-        /* TODO REQUIRED - draw the bubbles */
+        fill(this.color);
+        stroke(this.borderColor);
+        ellipse(this.x, this.y, this.size);
     }
 
     public move(): void {
-        /* TODO REQUIRED - Make the bubbles move as long as they aren't stopped. Model after ball behavior. */
-        /* The doBorderBehavior is built in for you below. */
+        if (this.stopped == false) {
+            this.x = this.xSpeed + this.x;
+            this.y = this.ySpeed + this.y;
+            if (this.size > 0 && this.x < -this.size / 2) {
+                this.x = width + this.size / 2;
+            } else if (this.size > 0 && this.x > width + this.size / 2) {
+                this.x = -this.size / 2;
+            }
+            if (this.size > 0 && this.y < -this.size / 2) {
+                this.y = height + this.size / 2;
+            } else if (this.size > 0 && this.y > height + this.size / 2) {
+                this.y = -this.size / 2;
+            }
+        }
     }
+
 
     public distFromMouse(): number {
         return dist(this.x, this.y, mouseX, mouseY);
@@ -45,5 +74,6 @@ export class Bubble {
             this.y = -this.size / 2;
         }
     }
+
 }
 

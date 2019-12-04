@@ -3,17 +3,34 @@ export class Ball {
   private x: number;
   private y: number;
   private size: number;
-  private xSpeed: number = random(-3, 3);
-  private ySpeed: number = random(-3, 3);
+  private xSpeed: number = random(-2, 2);
+  private ySpeed: number = random(-2, 2);
   private stopped: boolean = false;
   private color: string = "red";
   private borderColor: string = "black";
 
-  /* TODO REQUIRED - add accessors and mutators for x, y, size, color, and borderColor */
-  constructor(x: number, y: number, size: number) {
-    /* TODO REQUIRED = Build your constructor */
-    /* TODO OPTIONAL - add optional parameters to set color and borderColor on creation of the object */
+  constructor(x: number, y: number, size: number, color: string, borderColor: string) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.color = color;
+    this.borderColor = borderColor;
   }
+  public getX() { return this.x }
+  public setX(newX: number) { this.x = newX; }
+
+  public getY() { return this.y; }
+  public setY(newY: number) { this.y = newY }
+
+  public getsize() { return this.size; }
+  public setSize(newsize: number) { this.size = newsize; }
+
+  public getcolor() { return this.color; }
+  public setcolor(newColor: string) { this.color = newColor; }
+
+  public getBordercolor() { return this.borderColor; }
+  public setBorderColor(newBorderColor: string) { this.borderColor = newBorderColor; }
+
 
   public stop() {
     this.stopped = true;
